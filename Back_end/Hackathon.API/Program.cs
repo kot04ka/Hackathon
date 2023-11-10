@@ -15,6 +15,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEFCore(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
+var policyName = "defaultReactCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(policyName, builder =>
+    {
+        builder.WithOrigins("http://localhost:5713")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
