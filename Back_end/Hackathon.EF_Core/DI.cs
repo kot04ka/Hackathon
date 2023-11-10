@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hackathon.EF_Core.Context;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,7 +13,7 @@ namespace Hackathon.EF_Core
 
             //services.AddAutoMapper(assebmly);
 
-            //services.AddDbContext<AuthLinkContext>();
+            services.AddDbContext<ApplicationContext>();
             
             //services.AddScoped<IAuthRepository, AuthRepository>();
         }
