@@ -1,4 +1,6 @@
 using Hackathon.EF_Core;
+using Hackathon.EF_Core.Context;
+using Hackathon.EF_Core.Seed;
 using Hackathon.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,5 +27,13 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    using (var db = scope.ServiceProvider.GetRequiredService<ApplicationContext>())
+    {
+        await db.SeedDB();
+    }
+}
 
 app.Run();
