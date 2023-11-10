@@ -16,6 +16,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/extensions': 0,
     'react/jsx-filename-extension': [1, { "extensions": [".ts", ".tsx"] }],
+    'react/no-array-index-key': 'off',
     'react/function-component-definition': [2, { "namedComponents": "arrow-function" }],
     'react-refresh/only-export-components': [
       'warn',

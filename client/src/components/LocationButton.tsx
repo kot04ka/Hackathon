@@ -1,33 +1,39 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { useMapContext } from '../hooks';
+import { LocationIcon } from './icons';
+import { Position } from '../common/interfaces';
 
-export const LocationButton = ({ map }: { map: google.maps.Map }) => {
+export const LocationButton: FC = () => {
+  const { map, setCurrentUserPosition } = useMapContext();
+
   const onClick = () => {
-    const infoWindow = new google.maps.InfoWindow();
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
-          const pos = {
+          const pos: Position = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
           map.setCenter(pos);
+          setCurrentUserPosition(pos);
         },
-        () => {
-          // handleLocationError(true, infoWindow, map.getCenter()!);
-          console.error(infoWindow, map.getCenter()!);
+        (positionError) => {
+          console.error(positionError);
         },
       );
     } else {
-      console.error(infoWindow, map.getCenter());
-      // Browser doesn't support Geolocation
-      // handleLocationError(false, infoWindow, map.getCenter()!);
+      console.error("Browser doesn't support Geolocation");
     }
   };
 
-  return <button type="button" onClick={onClick}>Current location</button>;
+  return (
+    <button
+      type="button"
+      className="absolute bg-white z-50 bottom-[13rem] right-[0.7rem] w-[2.5rem] h-[2.5rem] rounded-[5rem] flex justify-center items-center"
+      onClick={onClick}
+    >
+      <LocationIcon />
+    </button>
+  );
 };
