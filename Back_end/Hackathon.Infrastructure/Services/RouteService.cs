@@ -6,11 +6,6 @@ namespace Hackathon.Infrastructure.Services
 {
     public class RouteService : IRouteService
     {
-        static RouteService()
-        {
-            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyBP70Yds30-0rELR1lplMl1Pv3IR8Zut6g"));
-        }
-
         public RouteService()
         {
             //will add point repo here.

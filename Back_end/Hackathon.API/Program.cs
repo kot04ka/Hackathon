@@ -1,3 +1,4 @@
+using Google.Maps;
 using Hackathon.EF_Core;
 using Hackathon.EF_Core.Context;
 using Hackathon.EF_Core.Seed;
@@ -47,5 +48,15 @@ using (var scope = app.Services.CreateScope())
         await db.SeedDB();
     }
 }
+var appConfig = new ConfigurationBuilder()
+    .AddUserSecrets<Program>()
+    .Build();
+
+if (string.IsNullOrEmpty(appConfig["API_Key"]))
+{
+    throw new Exception("Google api key was not found.");
+}
+
+GoogleSigned.AssignAllServices(new GoogleSigned(appConfig["API_Key"]));
 
 app.Run();
