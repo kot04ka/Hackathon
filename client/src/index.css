@@ -1,10 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
 html, body, #map {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.searchbar{
+    display: flex;
+    background-color: #fff;
+    height: 56px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    align-items: center;
+    top: 48px;
+    width: calc(100vw - 32px);
+    padding: 16px;
+    left: 50%;
+    border-radius: 28px;
+    transform: translate(-50%, -50%);
+}
+.searchbar input{
+    width: 100px
+}
+.search{
+    display: flex;
+    flex-direction: row;
+}
+.control-icons{
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    margin-left: auto;
+    height: 48px;
+}
+.gm-fullscreen-control{
+    visibility: hidden;
+}
+.search input:focus{
+    outline: none;
+}
+.search input{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.16px;
+    line-height: 24px;
+}
+.menu-icon{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searchbar button{
+    border-radius: 33px;
+}
+.control-icons button{
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    height: 48px;
+}
+.searchbar button:hover{
+    background-color: rgba(73, 69, 79, 0.08);
 }
