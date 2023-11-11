@@ -10,6 +10,7 @@ namespace Hackathon.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IRouteService, RouteService>();
+            _ = services.AddScoped<IMatrixService, MatrixService>();
         }
     }
 }
