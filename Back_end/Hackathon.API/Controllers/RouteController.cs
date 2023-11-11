@@ -1,9 +1,9 @@
-﻿using Google.Maps;
-using Google.Maps.Direction;
-using Google.Maps.DistanceMatrix;
+﻿using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Directions.Response;
 using Hackathon.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Hackathon.API.Controllers
 {
@@ -22,15 +22,21 @@ namespace Hackathon.API.Controllers
         }
 
         [HttpGet("get")]
-        public async Task<DirectionResponse> GetDirection([FromQuery] decimal strLat, [FromQuery] decimal strLng, [FromQuery] decimal endLat, [FromQuery] decimal endLng)
+        public async Task<string> GetDirection([FromQuery] double strLat, [FromQuery] double strLng, [FromQuery] double endLat, [FromQuery] double endLng)
         {
-            return await _routeService.GetDirection(new LatLng(strLat, strLng), new LatLng(endLat, endLng));
+            Response.Headers.Append("Access-Control-Allow-Origin", "*");
+            var resp = await _routeService.GetDirection(
+                new LatLng() { Latitude = strLat, Longitude = strLng },
+                new LatLng() { Latitude = endLat, Longitude = endLng });
+            //return resp;
+            var json = JsonConvert.SerializeObject(resp);
+            return json;
         }
 
-        [HttpGet("getMatrix")]
-        public async Task<DistanceMatrixResponse> GetMatrix([FromQuery] decimal strLat, [FromQuery] decimal strLng, [FromQuery] decimal endLat, [FromQuery] decimal endLng)
-        {
-            return await _matrixService.GetMatrix(new LatLng(strLat, strLng), new LatLng(endLat, endLng));
-        }
+        //[HttpGet("getMatrix")]
+        //public async Task<DistanceMatrixResponse> GetMatrix([FromQuery] decimal strLat, [FromQuery] decimal strLng, [FromQuery] decimal endLat, [FromQuery] decimal endLng)
+        //{
+        //    return await _matrixService.GetMatrix(new LatLng(strLat, strLng), new LatLng(endLat, endLng));
+        //}
     }
 }

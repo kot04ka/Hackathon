@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
@@ -16,5 +17,6 @@
     <ProjectReference Include="..\Hackathon.EF_Core\Hackathon.EF_Core.csproj" />
     <ProjectReference Include="..\Hackathon.Infrastructure\Hackathon.Infrastructure.csproj" />
   </ItemGroup>
+
 
 </Project>

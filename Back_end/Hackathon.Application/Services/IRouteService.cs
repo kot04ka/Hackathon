@@ -1,10 +1,11 @@
-﻿using Google.Maps;
-using Google.Maps.Direction;
+﻿using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Directions.Response;
+using Hackathon.Domain.ViewModels;
 
 namespace Hackathon.Application.Services
 {
     public interface IRouteService
     {
-        Task<DirectionResponse> GetDirection(LatLng start, LatLng end);
+        Task<DirectionResponseViewModel> GetDirection(LatLng start, LatLng end);
     }
 }

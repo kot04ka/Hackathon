@@ -1,4 +1,3 @@
-using Google.Maps;
 using Hackathon.EF_Core;
 using Hackathon.EF_Core.Context;
 using Hackathon.EF_Core.Seed;
@@ -21,10 +20,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(policyName, builder =>
     {
-        builder.WithOrigins("http://localhost:5713")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
+        //builder.WithOrigins("http://localhost:5173/")
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
     });
 });
 
@@ -52,11 +51,11 @@ var appConfig = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
     .Build();
 
-if (string.IsNullOrEmpty(appConfig["API_Key"]))
+if (string.IsNullOrEmpty(appConfig["ApiKey"]))
 {
     throw new Exception("Google api key was not found.");
 }
 
-GoogleSigned.AssignAllServices(new GoogleSigned(appConfig["API_Key"]));
+//GoogleSigned.AssignAllServices(new GoogleSigned(appConfig["API_Key"]));
 
 app.Run();
